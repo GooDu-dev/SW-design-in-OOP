@@ -1,3 +1,5 @@
+package Customer;
+
 public class CustomerMailFactory {
     public static Customer createCustomer(String type) throws ExceptionInInitializerError {
         Customer output = null;

@@ -1,13 +1,20 @@
+package Customer;
+
+import java.io.NotActiveException;
 import java.util.Scanner;
 
-public class CustomerMailApplication {
-    /**
-     * @param args the command line arguments
-     */
-    private Customer customer;
+import Company.Company;
 
-    public CustomerMailApplication(Customer customer) {
+public class CustomerBrochureApplication {
+
+    private Customer customer;
+    private static Company company = null;
+
+    public CustomerBrochureApplication(Customer customer) {
         this.customer = customer;
+        if (company == null) {
+            CustomerBrochureApplication.company = new Company();
+        }
     }
 
     public static String getCustomerTypeFromUser() {
@@ -30,14 +37,18 @@ public class CustomerMailApplication {
         return customerType;
     }
 
-    public String generateMail() {
-        return customer.createMail();
+    public String generateBrochure() {
+        try {
+            return CustomerBrochureApplication.company.sendBrochure(this.customer);
+        } catch (NotActiveException e) {
+            return String.format("%s: %s", e.getClass(), e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
         String customerType = getCustomerTypeFromUser();
         Customer customer = CustomerMailFactory.createCustomer(customerType);
-        CustomerMailApplication app = new CustomerMailApplication(customer);
-        System.out.println(app.generateMail());
+        CustomerBrochureApplication app = new CustomerBrochureApplication(customer);
+        System.out.println(app.generateBrochure());
     }
 }
