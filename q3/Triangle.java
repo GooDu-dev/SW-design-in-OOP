@@ -20,4 +20,7 @@ public class Triangle extends Shape {
 		this.height = height;
 	}
 
+	public void accept(ShapeSavingVisitor visitor) {
+        visitor.visit(this);
+    }
 }

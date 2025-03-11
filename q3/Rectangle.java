@@ -19,4 +19,8 @@ public class Rectangle extends Shape {
     public void setWidth(int width) {
         this.width = width;
     }
+
+    public void accept(ShapeSavingVisitor visitor) {
+        visitor.visit(this);
+    }
 }

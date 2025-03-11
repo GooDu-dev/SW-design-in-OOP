@@ -1,3 +1,4 @@
+
 public class Circle extends Shape {
 	private double radius;
 	public Circle(double radius, int x, int y) {
@@ -11,4 +12,8 @@ public class Circle extends Shape {
 	public void setRadius(double radius) {
 		this.radius = radius;
 	}
+
+	public void accept(ShapeSavingVisitor visitor) {
+        visitor.visit(this);
+    }
 }
